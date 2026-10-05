@@ -18,4 +18,47 @@ public class Department {
 
     @OneToMany(mappedBy = "department")
     private List<Specialty> specialties = new ArrayList<>();
+
+    public Department(Long id, String name, String description, List<Specialty> specialties) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.specialties = specialties;
+    }
+
+    public Department() {
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Specialty> getSpecialties() {
+        return specialties;
+    }
+
+    public void setSpecialties(List<Specialty> specialties) {
+        this.specialties = specialties;
+    }
 }

@@ -4,6 +4,7 @@ import com.clinicmanager.exception.DuplicateEmailException;
 import com.clinicmanager.service.AuthService.RegisterService;
 import com.clinicmanager.service.AuthService.RegisterService;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -24,7 +25,6 @@ public class RegisterController {
     // POST /register
     public void register(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         // 1. lire et nettoyer
         String lastName  = clean(request.getParameter("lastName"));
         String firstName = clean(request.getParameter("firstName"));

@@ -25,4 +25,52 @@ public class Doctor {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public void setSpecialty(Specialty specialty) {
+        this.specialty = specialty;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getMatricule() {
+        return matricule;
+    }
+
+    public void setMatricule(String matricule) {
+        this.matricule = matricule;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Specialty getSpecialty() {
+        return specialty;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

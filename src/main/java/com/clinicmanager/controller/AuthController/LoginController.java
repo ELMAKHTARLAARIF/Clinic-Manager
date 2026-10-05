@@ -24,11 +24,11 @@ public class LoginController {
 
         Map<String, String> errors = new HashMap<>();
 
-        if (email == null || email.isEmpty()) {
-            errors.put("email", "L'email est requis.");
+        if (email.isEmpty()) {
+            errors.put("email", "Email est requires.");
         }
         if (password == null || password.isEmpty()) {
-            errors.put("password", "Le mot de passe est requis.");
+            errors.put("password", "Le mot de passe est requires.");
         }
 
         if (!errors.isEmpty()) {
@@ -42,7 +42,7 @@ public class LoginController {
 
             req.getSession().setAttribute("currentUser", user);
 
-            res.sendRedirect(req.getContextPath() + "/auth/register");      // bdel redirect
+            res.sendRedirect(req.getContextPath() + "/admin/dashboard");      // bdel redirect
 
         } catch (IllegalArgumentException e) {
 

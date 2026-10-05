@@ -2,6 +2,7 @@ package com.clinicmanager.service.AuthService;
 
 import com.clinicmanager.enums.Role;                 // adapte si ton enum est dans un autre package
 import com.clinicmanager.exception.DuplicateEmailException;
+import com.clinicmanager.model.Patient;
 import com.clinicmanager.model.User;
 import com.clinicmanager.repository.UserRepository;
 import com.clinicmanager.repository.UserRepository;
@@ -35,9 +36,12 @@ public class RegisterService {
         user.setPassword(PasswordUtil.hash(password));
         user.setRole(Role.PATIENT);
         user.setActive(true);
+        Patient patient = new Patient();
+        patient.setPhone(isBlank(phone)?null:phone.trim());
 
         try {
-            return userRepository.save(user);
+            userRepository.saveWithUser(user, patient, (em, p) -> p.setUser(user));
+            return user;
         } catch (PersistenceException e) {
             if (userRepository.existsByEmail(normalizedEmail))
                 throw new DuplicateEmailException("Email Already Exist.");

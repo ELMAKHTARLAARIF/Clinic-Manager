@@ -1,3 +1,3 @@
 package com.clinicmanager.enums;
 
-public enum Role { PATIENT, DOCTOR, ADMIN, STAFF }
+public enum Role {User, PATIENT, DOCTOR, ADMIN, STAFF }
