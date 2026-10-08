@@ -19,6 +19,7 @@
 //        HttpServletRequest request = (HttpServletRequest) req;
 //        HttpServletResponse response = (HttpServletResponse) res;
 //
+//
 //        String path = request.getRequestURI().substring(request.getContextPath().length());
 //
 //        boolean isPublic = PUBLIC_PATHS.stream().anyMatch(p ->

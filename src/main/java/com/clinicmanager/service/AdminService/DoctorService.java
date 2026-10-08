@@ -24,6 +24,11 @@ public class DoctorService {
     public List<Doctor> findAll() {
         return doctorRepository.findAll();      // liste vide si aucun médecin : pas d'erreur
     }
+
+
+    public List<Doctor> findAllActive() {
+        return doctorRepository.findAllActive();
+    }
     public void createDoctor(String lastName, String firstName, String email, String phone, String password, String matricule, String title, Long departmentId, Long specialtyId) {
 
         String normalizedEmail = email.trim().toLowerCase();

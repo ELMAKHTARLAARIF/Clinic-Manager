@@ -5,6 +5,9 @@ import com.clinicmanager.controller.AdminController.DoctorController;
 import com.clinicmanager.controller.AdminController.PatientController;
 import com.clinicmanager.controller.AuthController.LoginController;
 import com.clinicmanager.controller.AuthController.RegisterController;
+import com.clinicmanager.controller.DoctorController.AvailabilityController;
+import com.clinicmanager.controller.DoctorController.AvailabilityController;
+import com.clinicmanager.controller.DoctorController.BookingController;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,6 +33,9 @@ public class RouterServlet extends HttpServlet {
     private final DoctorController doctorController = new DoctorController();
     private final PatientController patientController = new PatientController();
     private final DepartmentController departmentController = new DepartmentController();
+    private final AvailabilityController availabilityController = new AvailabilityController();
+    private final BookingController bookingController = new BookingController();
+
 
     private final Map<String, Handler> getRoutes = new HashMap<>();
     private final Map<String, Handler> postRoutes = new HashMap<>();
@@ -46,15 +52,10 @@ public class RouterServlet extends HttpServlet {
         getRoutes.put("/admin/users", view("admin/users.jsp"));
 
         getRoutes.put("/admin/patients", patientController::list);
+
         getRoutes.put("/admin/patients/get", patientController::getPatient);
         getRoutes.put("/admin/doctors", doctorController::list);
         getRoutes.put("/admin/departments", departmentController::list);
-
-        getRoutes.put("/logout", (req, res) -> {
-            HttpSession session = req.getSession(false);
-            if (session != null) session.invalidate();
-            res.sendRedirect(req.getContextPath() + "/login");
-        });
 
         postRoutes.put("/login", loginController::login);
         postRoutes.put("/register", registerController::register);
@@ -62,6 +63,27 @@ public class RouterServlet extends HttpServlet {
         postRoutes.put("/admin/patients/create", patientController::createPatient);
         postRoutes.put("/admin/patients/update", patientController::updatePatient);
         postRoutes.put("/admin/patients/delete", patientController::deletePatient);
+        getRoutes.put("/logout", (req, res) -> {
+            HttpSession session = req.getSession(false);
+            if (session != null) session.invalidate();
+            res.sendRedirect(req.getContextPath() + "/login");
+        });
+
+
+        getRoutes.put("/doctor/dashboard", view("doctor/dashboard.jsp"));
+        getRoutes.put("/doctor/appointments", view("doctor/appointments.jsp"));
+        
+        getRoutes.put("/doctor/availabilities", availabilityController::list);
+        postRoutes.put("/doctor/availabilities/create", availabilityController::create);
+        postRoutes.put("/doctor/availabilities/delete", availabilityController::delete);
+
+
+         getRoutes.put("/patient/book", bookingController::page);
+        getRoutes.put("/patient/agenda", bookingController::agendaJson);
+       // the JSON endpoint
+//        postRoutes.put("/patient/appointments/create", appointmentController::create);
+
+
     }
 
     @Override

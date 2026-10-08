@@ -1,5 +1,7 @@
 package com.clinicmanager.util;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 public final class ValidationUtil {
@@ -34,4 +36,11 @@ public final class ValidationUtil {
     public static boolean hasMinLength(String s, int min) {
         return s != null && s.length() >= min;
     }
+
+    public static LocalTime parseTime(String value) {
+        try { return LocalTime.parse(value); }                    // "08:30"
+        catch (DateTimeParseException | NullPointerException e) { return null; }
+    }
+
+
 }

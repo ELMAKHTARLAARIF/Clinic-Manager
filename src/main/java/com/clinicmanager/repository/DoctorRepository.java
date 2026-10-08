@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class DoctorRepository {
@@ -24,10 +25,30 @@ public class DoctorRepository {
         }
     }
 
+    public List<Doctor> findAllActive() {
+        try (EntityManager em = JPAUtil.getEntityManager()) {
+            return em.createQuery(
+                            "SELECT d FROM Doctor d " +
+                                    "JOIN FETCH d.user u " +
+                                    "JOIN FETCH d.specialty s " +
+                                    "JOIN FETCH d.department dep " +
+                                    "WHERE u.active = true " +
+                                    "ORDER BY u.lastName, u.firstName", Doctor.class)
+                    .getResultList();                      // liste vide si aucun médecin : pas d'erreur
+        }
+    }
     public boolean existsByMatricule(String matricule) {
         try (EntityManager em = JPAUtil.getEntityManager()) {
             Long count = em.createQuery("SELECT COUNT(d) FROM Doctor d WHERE UPPER(d.matricule) = :m", Long.class).setParameter("m", matricule.toUpperCase()).getSingleResult();
             return count > 0;
+        }
+    }
+    public Optional<Doctor> findByUserId(Long userId) {
+        try (EntityManager em = JPAUtil.getEntityManager()) {
+            return em.createQuery("SELECT d FROM Doctor d WHERE d.user.id = :uid", Doctor.class)
+                    .setParameter("uid", userId)
+                    .getResultStream()
+                    .findFirst();
         }
     }
 

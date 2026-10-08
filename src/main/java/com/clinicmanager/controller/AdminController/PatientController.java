@@ -26,13 +26,11 @@ public class PatientController {
     private void loadFormData(HttpServletRequest req) {
         List<Patient> patients = patientService.findAll();
         req.setAttribute("patients", patients);
-        System.out.println("patients = " + patients.size());     // size is more useful than printing the entities
 
     }
 
     public void list(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         loadFormData(req);
-        if ("1".equals(req.getParameter("created"))) req.setAttribute("success", "Patient created  successfully.");
         req.getRequestDispatcher(VIEWPATIENT).forward(req, res);
     }
 

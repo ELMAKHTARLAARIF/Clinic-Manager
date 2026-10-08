@@ -33,5 +33,69 @@ public class Availability {
     @Column(nullable = false)
     private LocalDate validFrom;
 
-    private LocalDate validTo;          // null = sans fin
+    private LocalDate validTo; // null = sans fin
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public AvailabilityStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AvailabilityStatus status) {
+        this.status = status;
+    }
+
+    public LocalDate getValidFrom() {
+        return validFrom;
+    }
+
+    public void setValidFrom(LocalDate validFrom) {
+        this.validFrom = validFrom;
+    }
+
+    public LocalDate getValidTo() {
+        return validTo;
+    }
+
+    public void setValidTo(LocalDate validTo) {
+        this.validTo = validTo;
+    }
 }
