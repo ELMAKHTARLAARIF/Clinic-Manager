@@ -21,7 +21,7 @@ import static com.clinicmanager.util.ValidationUtil.parseTime;
 public class AvailabilityController {
 
     private static final String VIEW = "/WEB-INF/views/doctor/availabilities.jsp";
-    private final com.clinicmanager.service.DoctorSpaceService.availabilityService availabilityService = new com.clinicmanager.service.DoctorSpaceService.availabilityService();
+    private final com.clinicmanager.service.DoctorSpaceService.AvailabilityService availabilityService = new com.clinicmanager.service.DoctorSpaceService.AvailabilityService();
                     
     // GET /doctor/availabilities
     public void list(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

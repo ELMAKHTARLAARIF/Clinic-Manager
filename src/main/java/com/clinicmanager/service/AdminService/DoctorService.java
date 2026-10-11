@@ -1,18 +1,15 @@
 package com.clinicmanager.service.AdminService;
 
-import com.clinicmanager.enums.BloodGroup;
-import com.clinicmanager.enums.Gender;
 import com.clinicmanager.enums.Role;                       // adapte si ton enum est ailleurs
 import com.clinicmanager.exception.DuplicateEmailException;
 import com.clinicmanager.exception.DuplicateMatriculeException;
 import com.clinicmanager.model.*;
-import com.clinicmanager.repository.DoctorRepository;
+import com.clinicmanager.repository.doctor.DoctorRepository;
 import com.clinicmanager.repository.PatientRepository;
 import com.clinicmanager.repository.UserRepository;
 import com.clinicmanager.util.PasswordUtil;
 import jakarta.persistence.PersistenceException;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class DoctorService {

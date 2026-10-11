@@ -46,8 +46,8 @@ public class PatientController {
 
         String StringbirthDate = req.getParameter("birthDate");
         LocalDate birthDate = LocalDate.parse(StringbirthDate);
-        Gender gender = Gender.valueOf(req.getParameter("gender"));
-        BloodGroup bloodGroup = BloodGroup.valueOf(req.getParameter("bloodGroup"));
+        Gender gender = parseEnum(Gender.class, req.getParameter("gender"));
+        BloodGroup bloodGroup = parseEnum(BloodGroup.class, req.getParameter("bloodGroup"));
 
         Map<String, String> errors = validateData(lastName, firstName, email, phone, password);
 

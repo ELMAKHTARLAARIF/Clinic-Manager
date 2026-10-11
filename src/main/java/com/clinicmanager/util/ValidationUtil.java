@@ -41,6 +41,9 @@ public final class ValidationUtil {
         try { return LocalTime.parse(value); }                    // "08:30"
         catch (DateTimeParseException | NullPointerException e) { return null; }
     }
-
+    public static <E extends Enum<E>> E parseEnum(Class<E> type, String value) {
+        try { return Enum.valueOf(type, value.trim().toUpperCase()); }
+        catch (IllegalArgumentException | NullPointerException e) { return null; }
+    }
 
 }

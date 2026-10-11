@@ -1,18 +1,15 @@
 package com.clinicmanager.controller.AdminController;
 
-import com.clinicmanager.enums.BloodGroup;
-import com.clinicmanager.enums.Gender;
 import com.clinicmanager.exception.DuplicateEmailException;
 import com.clinicmanager.exception.DuplicateMatriculeException;
 import com.clinicmanager.service.AdminService.DepartmentService;
-import com.clinicmanager.service.AdminService.specialtyService;
+import com.clinicmanager.service.AdminService.SpecialtyService;
 import com.clinicmanager.service.AdminService.DoctorService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -25,7 +22,7 @@ public class DoctorController {
 
     private void loadFormData(HttpServletRequest req) {
         req.setAttribute("departments", DepartmentService.findAll());   // list of DTOs: id, name
-        req.setAttribute("specialties", specialtyService.findAll());
+        req.setAttribute("specialties", SpecialtyService.findAll());
         req.setAttribute("doctors", doctorService.findAll()); // list of DTOs: id, name, departmentId
     }
 

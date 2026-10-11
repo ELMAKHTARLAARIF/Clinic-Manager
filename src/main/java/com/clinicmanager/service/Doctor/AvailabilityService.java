@@ -4,7 +4,7 @@ import com.clinicmanager.enums.AvailabilityStatus;
 import com.clinicmanager.model.Availability;
 import com.clinicmanager.model.Doctor;
 import com.clinicmanager.repository.AvailabilityRepository;
-import com.clinicmanager.repository.DoctorRepository;
+import com.clinicmanager.repository.doctor.DoctorRepository;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
@@ -13,7 +13,7 @@ import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
 
-public class availabilityService {
+public class AvailabilityService {
 
     private static final int SLOT_MINUTES = 30;       // durée d'un rendez-vous (cahier)
 
@@ -67,7 +67,7 @@ public class availabilityService {
 
     /** Le médecin vient TOUJOURS de la session, jamais d'un paramètre du formulaire. */
     private Doctor currentDoctor(Long userId) {
-        return doctorRepository.findByUserId(userId)
+        return doctorRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Aucun profil médecin pour ce compte."));
     }
 

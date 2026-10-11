@@ -25,6 +25,15 @@ public class PatientRepository {
         }
     }
 
+    public Optional<Patient> findByUserId(Long userId) {
+        try (EntityManager em = JPAUtil.getEntityManager()) {
+            return em.createQuery(
+                            "SELECT p FROM Patient p JOIN FETCH p.user WHERE p.user.id = :uid", Patient.class)
+                    .setParameter("uid", userId)
+                    .getResultStream()
+                    .findFirst();
+        }
+    }
     public List<Patient> findAll() {
         try (EntityManager em = JPAUtil.getEntityManager()) {
 

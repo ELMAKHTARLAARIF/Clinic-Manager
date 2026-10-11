@@ -1,16 +1,11 @@
-package com.clinicmanager.repository;
+package com.clinicmanager.repository.doctor;
 
-import com.clinicmanager.model.Department;
 import com.clinicmanager.model.Doctor;
-import com.clinicmanager.model.Specialty;
-import com.clinicmanager.model.User;
 import com.clinicmanager.util.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class DoctorRepository {
 
@@ -27,6 +22,7 @@ public class DoctorRepository {
 
     public List<Doctor> findAllActive() {
         try (EntityManager em = JPAUtil.getEntityManager()) {
+
             return em.createQuery(
                             "SELECT d FROM Doctor d " +
                                     "JOIN FETCH d.user u " +
@@ -43,10 +39,11 @@ public class DoctorRepository {
             return count > 0;
         }
     }
-    public Optional<Doctor> findByUserId(Long userId) {
+    public Optional<Doctor> findById(Long id) {
         try (EntityManager em = JPAUtil.getEntityManager()) {
-            return em.createQuery("SELECT d FROM Doctor d WHERE d.user.id = :uid", Doctor.class)
-                    .setParameter("uid", userId)
+            return em.createQuery(
+                            "SELECT d FROM Doctor d JOIN FETCH d.user u WHERE d.id = :id AND u.active = true", Doctor.class)
+                    .setParameter("id", id)
                     .getResultStream()
                     .findFirst();
         }

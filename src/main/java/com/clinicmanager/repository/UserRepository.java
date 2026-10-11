@@ -1,6 +1,5 @@
 package com.clinicmanager.repository;
 
-import com.clinicmanager.exception.UserNotFoundException;
 import com.clinicmanager.model.User;
 import com.clinicmanager.util.JPAUtil;
 import jakarta.persistence.EntityManager;
@@ -20,13 +19,9 @@ public class UserRepository {
     }
 
 
-
     public Optional<User> findByEmail(String email) {
         try (EntityManager em = JPAUtil.getEntityManager()) {
-            User user = em.createQuery(
-                            "SELECT u FROM User u WHERE u.email = :email", User.class)
-                    .setParameter("email", email)
-                    .getSingleResult();
+            User user = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class).setParameter("email", email).getSingleResult();
             return Optional.of(user);
         } catch (NoResultException e) {
             return Optional.empty();

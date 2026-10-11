@@ -6,8 +6,7 @@ import com.clinicmanager.controller.AdminController.PatientController;
 import com.clinicmanager.controller.AuthController.LoginController;
 import com.clinicmanager.controller.AuthController.RegisterController;
 import com.clinicmanager.controller.DoctorController.AvailabilityController;
-import com.clinicmanager.controller.DoctorController.AvailabilityController;
-import com.clinicmanager.controller.DoctorController.BookingController;
+import com.clinicmanager.controller.DoctorController.AppointmentController;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,7 +33,7 @@ public class RouterServlet extends HttpServlet {
     private final PatientController patientController = new PatientController();
     private final DepartmentController departmentController = new DepartmentController();
     private final AvailabilityController availabilityController = new AvailabilityController();
-    private final BookingController bookingController = new BookingController();
+    private final AppointmentController appointmentController = new AppointmentController();
 
 
     private final Map<String, Handler> getRoutes = new HashMap<>();
@@ -78,10 +77,12 @@ public class RouterServlet extends HttpServlet {
         postRoutes.put("/doctor/availabilities/delete", availabilityController::delete);
 
 
-         getRoutes.put("/patient/book", bookingController::page);
-        getRoutes.put("/patient/agenda", bookingController::agendaJson);
+         getRoutes.put("/patient/book", appointmentController::page);
+        getRoutes.put("/patient/agenda", appointmentController::agendaJson);
+        getRoutes.put("/patient/appointments", appointmentController::list);
+         postRoutes.put("/patient/appointments/cancel", appointmentController::cancel);
        // the JSON endpoint
-//        postRoutes.put("/patient/appointments/create", appointmentController::create);
+        postRoutes.put("/patient/appointments/create", appointmentController::create);
 
 
     }
