@@ -3,6 +3,7 @@ package com.clinicmanager.controller.DoctorController;
 import com.clinicmanager.dto.UserDTO;
 import com.clinicmanager.enums.AvailabilityStatus;
 import com.clinicmanager.mapper.AvailabilityMapper;
+import com.clinicmanager.service.Doctor.AvailabilityService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ import static com.clinicmanager.util.ValidationUtil.parseTime;
 public class AvailabilityController {
 
     private static final String VIEW = "/WEB-INF/views/doctor/availabilities.jsp";
-    private final com.clinicmanager.service.DoctorSpaceService.AvailabilityService availabilityService = new com.clinicmanager.service.DoctorSpaceService.AvailabilityService();
+    private final AvailabilityService availabilityService = new AvailabilityService();
                     
     // GET /doctor/availabilities
     public void list(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -79,7 +80,6 @@ public class AvailabilityController {
         } catch (IllegalArgumentException e) {                // chevauchement, dimanche, profil introuvable...
             showFormWithErrors(req, res, errors, e.getMessage());
         } catch (RuntimeException e) {
-            e.printStackTrace();
             showFormWithErrors(req, res, errors, "La disponibilité n'a pas pu être enregistrée. Réessayez.");
         }
     }

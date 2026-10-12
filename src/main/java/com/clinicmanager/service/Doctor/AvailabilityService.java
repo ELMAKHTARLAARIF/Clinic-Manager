@@ -1,9 +1,10 @@
-package com.clinicmanager.service.DoctorSpaceService;
+package com.clinicmanager.service.Doctor;
 
 import com.clinicmanager.enums.AvailabilityStatus;
+import com.clinicmanager.interfaces.IAvailabilityRepository;
 import com.clinicmanager.model.Availability;
 import com.clinicmanager.model.Doctor;
-import com.clinicmanager.repository.AvailabilityRepository;
+import com.clinicmanager.repository.doctor.AvailabilityRepository;
 import com.clinicmanager.repository.doctor.DoctorRepository;
 
 import java.time.DayOfWeek;

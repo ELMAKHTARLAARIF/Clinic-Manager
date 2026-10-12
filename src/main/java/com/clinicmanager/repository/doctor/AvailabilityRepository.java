@@ -1,6 +1,7 @@
-package com.clinicmanager.repository;
+package com.clinicmanager.repository.doctor;
 
 import com.clinicmanager.enums.AvailabilityStatus;
+import com.clinicmanager.interfaces.IAvailabilityRepository;
 import com.clinicmanager.model.Availability;
 import com.clinicmanager.model.Doctor;
 import com.clinicmanager.util.JPAUtil;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public class AvailabilityRepository {
+public class AvailabilityRepository implements IAvailabilityRepository {
 
     /** Toutes les disponibilités d'un médecin (liste vide si aucune). */
     public List<Availability> findByDoctor(Long doctorId) {

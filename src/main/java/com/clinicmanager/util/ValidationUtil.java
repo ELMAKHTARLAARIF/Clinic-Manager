@@ -1,5 +1,6 @@
 package com.clinicmanager.util;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
@@ -44,6 +45,10 @@ public final class ValidationUtil {
     public static <E extends Enum<E>> E parseEnum(Class<E> type, String value) {
         try { return Enum.valueOf(type, value.trim().toUpperCase()); }
         catch (IllegalArgumentException | NullPointerException e) { return null; }
+    }
+    public static LocalDate parseDate(String value) {
+        try { return LocalDate.parse(value); }
+        catch (DateTimeParseException | NullPointerException e) { return null; }
     }
 
 }

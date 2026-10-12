@@ -1,5 +1,6 @@
 package com.clinicmanager.repository;
 
+import com.clinicmanager.interfaces.IUserRepository;
 import com.clinicmanager.model.User;
 import com.clinicmanager.util.JPAUtil;
 import jakarta.persistence.EntityManager;
@@ -9,7 +10,7 @@ import jakarta.persistence.NoResultException;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
-public class UserRepository {
+public class UserRepository implements IUserRepository {
 
     public boolean existsByEmail(String email) {
         try (EntityManager em = JPAUtil.getEntityManager()) {

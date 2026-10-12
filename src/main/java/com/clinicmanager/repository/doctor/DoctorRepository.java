@@ -1,5 +1,6 @@
 package com.clinicmanager.repository.doctor;
 
+import com.clinicmanager.interfaces.IDoctorRepository;
 import com.clinicmanager.model.Doctor;
 import com.clinicmanager.util.JPAUtil;
 import jakarta.persistence.EntityManager;
@@ -7,7 +8,7 @@ import jakarta.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class DoctorRepository {
+public class DoctorRepository implements IDoctorRepository {
 
     /**
      * Tous les médecins, avec user, spécialité et département chargés (évite LazyInitializationException).

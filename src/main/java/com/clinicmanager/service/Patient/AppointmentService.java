@@ -17,10 +17,20 @@ import java.util.Comparator;
 import java.util.List;
 
 public class AppointmentService {
-    private static final int CANCEL_MIN_HOURS = 12;          // règle du cahier des charges
-    private final PatientRepository patientRepository = new PatientRepository();
-    private final DoctorRepository doctorRepository = new DoctorRepository();
-    private final AppointmentRepository appointmentRepository = new AppointmentRepository();
+    private static final int CANCEL_MIN_HOURS = 12;
+    private final PatientRepository patientRepository;
+    private final DoctorRepository doctorRepository;
+    private final AppointmentRepository appointmentRepository;
+    public AppointmentService() {                                   // used by the controllers: unchanged
+        this(new PatientRepository(), new DoctorRepository(), new AppointmentRepository());
+    }
+
+    public AppointmentService(PatientRepository patientRepository, DoctorRepository doctorRepository,
+                              AppointmentRepository appointmentRepository) {   // used by the tests
+        this.patientRepository = patientRepository;
+        this.doctorRepository = doctorRepository;
+        this.appointmentRepository = appointmentRepository;
+    }
 
     public void create(Long patientId, Long doctorId, LocalDateTime startDateTime, LocalDateTime endDateTime, String type, String reason) {
 
@@ -47,7 +57,7 @@ public class AppointmentService {
 
     public List<Appointment> findForUser(Long userId) {
         LocalDateTime now = LocalDateTime.now();
-        List<Appointment> all = appointmentRepository.findByPatientUser(userId);    // déjà triés du plus récent au plus ancien
+        List<Appointment> all = appointmentRepository.findByPatientUser(userId);
 
         List<Appointment> result = new ArrayList<>(all.stream().filter(a -> a.getStartDateTime().isAfter(now)).sorted(Comparator.comparing(Appointment::getStartDateTime)).toList());
         result.addAll(all.stream().filter(a -> !a.getStartDateTime().isAfter(now)).toList());
@@ -59,7 +69,7 @@ public class AppointmentService {
     }
 
     public void cancel(Long userId, Long appointmentId) {
-        Appointment appointment = appointmentRepository.findOwned(appointmentId, userId)       // le rendez-vous d'un AUTRE patient = "introuvable"
+        Appointment appointment = appointmentRepository.findOwned(appointmentId, userId)
                 .orElseThrow(() -> new IllegalArgumentException("Rendez-vous introuvable."));
 
         if (appointment.getStatus() != AppointmentStatus.PLANNED)

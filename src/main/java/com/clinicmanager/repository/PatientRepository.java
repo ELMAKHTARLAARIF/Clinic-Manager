@@ -1,5 +1,6 @@
 package com.clinicmanager.repository;
 
+import com.clinicmanager.interfaces.IPatientRepository;
 import com.clinicmanager.model.Patient;
 import com.clinicmanager.model.User;
 import com.clinicmanager.util.JPAUtil;
@@ -9,7 +10,7 @@ import jakarta.persistence.EntityTransaction;
 import java.util.List;
 import java.util.Optional;
 
-public class PatientRepository {
+public class PatientRepository implements IPatientRepository {
 
 
     public boolean existsByCin(String cin) {
